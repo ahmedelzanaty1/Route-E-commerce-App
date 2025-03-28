@@ -3,7 +3,9 @@ package com.example.routee_commerceapp.presentation.Screens.SignUp
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -34,6 +36,7 @@ fun SignUpScreen(
     var phone by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var passwordConfirm by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf("") }
     val signUpState = viewModel.registerState.collectAsState()
@@ -43,7 +46,7 @@ fun SignUpScreen(
             .fillMaxSize()
             .background(color = mainblue)
     ) {
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
             Spacer(modifier = Modifier.height(20.dp))
             Image(
                 painter = painterResource(id = R.drawable.logo),
@@ -141,12 +144,24 @@ fun SignUpScreen(
                     .background(color = Color.White, shape = CircleShape)
             )
 
-            // Password Instructions
+            // Confirm Password
             Text(
-                text = "Password must contain: Capital letters, numbers, and symbols.",
+                text = "Confirm Password",
                 color = Color.White,
                 modifier = Modifier.padding(start = 10.dp),
-                fontSize = 12.sp
+                fontWeight = FontWeight.Medium,
+                fontSize = 15.sp
+            )
+            Spacer(modifier = Modifier.height(5.dp))
+            OutlinedTextField(
+                value = passwordConfirm,
+                onValueChange = { passwordConfirm = it },
+                label = { Text("Confirm Password") },
+                visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                modifier = Modifier
+                    .padding(10.dp)
+                    .fillMaxWidth()
+                    .background(color = Color.White, shape = CircleShape)
             )
 
             // Error Message
@@ -163,16 +178,17 @@ fun SignUpScreen(
                 onClick = {
                     if (name.isEmpty() || !phone.matches(Regex("^01[0-9]{9}$")) ||
                         !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() ||
-                        !password.matches(Regex("^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#\$%^&+=]).{8,}$"))
+                        !password.matches(Regex("^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#\$%^&+=]).{8,}$")) ||
+                        password != passwordConfirm
                     ) {
                         errorMessage = "Invalid input. Please check your details."
                     } else {
-                        viewModel.register(name, email, password, phone)
+                        viewModel.register(name, email, password, phone, passwordConfirm)
                     }
                 },
                 modifier = Modifier
                     .padding(18.dp)
-                    .fillMaxWidth(),
+                    .fillMaxWidth().navigationBarsPadding(),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.White
                 ),
@@ -183,7 +199,6 @@ fun SignUpScreen(
 
             // Handling State
             when (val result = signUpState.value) {
-
                 is Resource.Success<*> -> {
                     LaunchedEffect(Unit) {
                         navigateToHome()

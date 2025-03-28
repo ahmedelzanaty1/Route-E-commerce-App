@@ -24,10 +24,11 @@ class AuthRepositoryImpl @Inject constructor(
         name: String,
         email: String,
         password: String,
-        phone: String
+        phone: String,
+        passwordConfirm: String
     ): SignUpModel {
         val response = authManager.signUp(
-            registerRequest = SignupRequest(name = name, email = email, password = password, phone = phone)
+            registerRequest = SignupRequest(name = name, email = email, password = password, phone = phone, rePassword = password)
         )
         return response.toSignUpModel()
     }

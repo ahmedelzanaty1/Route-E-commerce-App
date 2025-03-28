@@ -1,6 +1,5 @@
 package com.example.routee_commerceapp.data.dto.Auth.Signup
 
-
 import com.google.gson.annotations.SerializedName
 
 data class SignupRequest(
@@ -13,6 +12,9 @@ data class SignupRequest(
 
     @field:SerializedName("password")
     val password: String,
+
+    @field:SerializedName("rePassword")
+    val rePassword: String,
 
     @field:SerializedName("phone")
     val phone: String

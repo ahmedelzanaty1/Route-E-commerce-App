@@ -10,8 +10,8 @@ class SignupUseCase @Inject constructor(
     suspend operator fun invoke(name: String,
                                 email: String,
                                 password: String,
-                                phone: String): SignUpModel {
-        return authRepository.signUp(name, email, password, phone)
+                                phone: String , passwordConfirm: String): SignUpModel {
+        return authRepository.signUp(name, email, password, phone , passwordConfirm)
     }
 
 }
