@@ -1,5 +1,6 @@
 package com.example.routee_commerceapp.presentation.viewmodel.Auth
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.routee_commerceapp.constants.Resource
@@ -16,13 +17,16 @@ class SignUpViewModel  @Inject constructor(
 ): ViewModel() {
     private val _signupstate = MutableStateFlow<Resource<SignUpModel>>(Resource.Loading())
     val registerState: StateFlow<Resource<SignUpModel>> = _signupstate
-    fun register(name: String, email: String, password: String, phone: String) {
+    fun register(name: String, email: String, password: String, phone: String , passwordConfirm: String) {
         viewModelScope.launch {
             _signupstate.value = Resource.Loading()
+            Log.d("SignUpViewModel", "SignUp Request - Name: $name, Email: $email, Password: $password, PasswordConfirm: $passwordConfirm, Phone: $phone")
             try {
-                val result = signUpUseCase(name, email, password, phone)
+                val result = signUpUseCase(name, email, password, phone , passwordConfirm)
                 _signupstate.value = Resource.Success(result)
+                Log.d("SignUpViewModel", "SignUp Response: $result")
             } catch (e: Exception) {
+                Log.e("SignUpViewModel", "SignUp Error: ${e.message}")
                 _signupstate.value = Resource.Error(e.localizedMessage ?: "Unexpected error")
             }
         }
