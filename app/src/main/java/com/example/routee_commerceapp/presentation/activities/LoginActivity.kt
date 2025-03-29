@@ -26,7 +26,7 @@ class LoginActivity : ComponentActivity() {
         setContent {
             RouteEcommerceAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    NavHost()
+                    NavHost( modifier = Modifier.padding(innerPadding))
                 }
 
 
