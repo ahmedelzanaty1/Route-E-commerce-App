@@ -1,9 +1,6 @@
-package com.example.routee_commerceapp.di
+package com.example.routee_commerceapp.di.network
 
 import com.example.routee_commerceapp.constants.Utils
-import com.example.routee_commerceapp.data.remote.AuthManager
-import com.example.routee_commerceapp.data.repository.Auth.AuthRepositoryImpl
-import com.example.routee_commerceapp.domain.repository.AuthRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AuthModule {
+object NetworkModule {
 
     @Provides
     @Singleton
@@ -42,17 +39,5 @@ object AuthModule {
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideAuthManager(retrofit: Retrofit): AuthManager {
-        return retrofit.create(AuthManager::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun provideAuthRepository(authManager: AuthManager): AuthRepository {
-        return AuthRepositoryImpl(authManager)
     }
 }

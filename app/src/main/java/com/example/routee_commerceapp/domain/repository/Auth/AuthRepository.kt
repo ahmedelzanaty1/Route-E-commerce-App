@@ -1,4 +1,4 @@
-package com.example.routee_commerceapp.domain.repository
+package com.example.routee_commerceapp.domain.repository.Auth
 
 import com.example.routee_commerceapp.domain.model.Auth.Login.LogInModel
 import com.example.routee_commerceapp.domain.model.Auth.Signup.SignUpModel

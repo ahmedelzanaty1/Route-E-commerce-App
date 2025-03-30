@@ -1,7 +1,7 @@
 package com.example.routee_commerceapp.domain.use_case.Auth
 
 import com.example.routee_commerceapp.domain.model.Auth.Login.LogInModel
-import com.example.routee_commerceapp.domain.repository.AuthRepository
+import com.example.routee_commerceapp.domain.repository.Auth.AuthRepository
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(
