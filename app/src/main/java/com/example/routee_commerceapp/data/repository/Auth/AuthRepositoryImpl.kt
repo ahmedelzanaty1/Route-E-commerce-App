@@ -7,7 +7,7 @@ import com.example.routee_commerceapp.data.dto.Mapper.toSignUpModel
 import com.example.routee_commerceapp.data.remote.AuthManager
 import com.example.routee_commerceapp.domain.model.Auth.Login.LogInModel
 import com.example.routee_commerceapp.domain.model.Auth.Signup.SignUpModel
-import com.example.routee_commerceapp.domain.repository.AuthRepository
+import com.example.routee_commerceapp.domain.repository.Auth.AuthRepository
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(

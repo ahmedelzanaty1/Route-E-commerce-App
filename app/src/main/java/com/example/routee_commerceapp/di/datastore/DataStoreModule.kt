@@ -1,4 +1,4 @@
-package com.example.routee_commerceapp.di
+package com.example.routee_commerceapp.di.datastore
 
 import android.content.Context
 import com.example.routee_commerceapp.data.DataStore.DataStoreManager
