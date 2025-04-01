@@ -27,7 +27,7 @@ fun SearchBar(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(horizontal = 12.dp, vertical = 8.dp)
     ) {
         Image(
             painter = painterResource(id = R.drawable.logohome),
@@ -35,7 +35,7 @@ fun SearchBar(modifier: Modifier = Modifier) {
             contentScale = ContentScale.Fit,
             modifier = Modifier
                 .size(100.dp)
-                .padding(12.dp)
+                .padding(5.dp)
         )
         Spacer(modifier = Modifier.height(3.dp))
 
