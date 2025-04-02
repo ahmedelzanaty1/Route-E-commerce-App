@@ -67,17 +67,3 @@ fun ImageSliderWithIndicators(images: Slider) {
 
         }
     }
-
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewImageSliderWithIndicators() {
-    val imageList = Slider(
-        img = listOf(
-            R.drawable.slider1,
-            R.drawable.slider2,
-            R.drawable.slider3
-        )
-    )
-    ImageSliderWithIndicators(images = imageList)
-}

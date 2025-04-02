@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.routee_commerceapp.constants.sliderList
+import com.example.routee_commerceapp.presentation.Screens.Home.Componant.CategoriesSection
 import com.example.routee_commerceapp.presentation.Screens.Home.Componant.ImageSliderWithIndicators
 import com.example.routee_commerceapp.presentation.Screens.Home.Componant.SearchBar
 import com.example.routee_commerceapp.presentation.viewmodel.Home.HomeViewModel
@@ -28,17 +29,15 @@ fun Home(modifier: Modifier = Modifier,
             }
             item {
                 ImageSliderWithIndicators(images = sliderList[0])
+                Spacer(modifier = Modifier.height(6.dp))
+            }
+            item {
+                CategoriesSection()
+                Spacer(modifier = Modifier.height(6.dp))
             }
 
         }
     }
 
-
-}
-
-@Preview(showSystemUi = true)
-@Composable
-private fun shape() {
-    Home()
 
 }
