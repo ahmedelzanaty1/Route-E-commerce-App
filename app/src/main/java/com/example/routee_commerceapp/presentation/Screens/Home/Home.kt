@@ -14,7 +14,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.routee_commerceapp.constants.Destination
 import com.example.routee_commerceapp.constants.sliderList
+import com.example.routee_commerceapp.presentation.Screens.Categories.CategoriesScreen
 import com.example.routee_commerceapp.presentation.Screens.Home.Componant.Advert
 import com.example.routee_commerceapp.presentation.Screens.Home.Componant.BottomNavigationBar
 import com.example.routee_commerceapp.presentation.Screens.Home.Componant.CategoriesSection
@@ -23,47 +28,37 @@ import com.example.routee_commerceapp.presentation.Screens.Home.Componant.Mobile
 import com.example.routee_commerceapp.presentation.Screens.Home.Componant.SearchBar
 import com.example.routee_commerceapp.presentation.Screens.Home.Componant.WomenProductsSection
 import com.example.routee_commerceapp.presentation.viewmodel.Home.HomeViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-
 @Composable
-fun Home(
-    modifier: Modifier = Modifier.navigationBarsPadding(),
-    viewModel: HomeViewModel = hiltViewModel(),
-    navController: NavHostController
-) {
-    Scaffold(
-        modifier = modifier,
-        bottomBar = {
-            BottomNavigationBar(navController = navController)
-        }
-    ) { innerPadding ->
-        LazyColumn(modifier = Modifier
+fun HomeUi(viewModel: HomeViewModel = hiltViewModel()) {
+    LazyColumn(
+        modifier = Modifier
             .fillMaxSize()
-            .padding(innerPadding)) {
-
-            item {
-                SearchBar()
-                Spacer(modifier = Modifier.height(4.dp))
-            }
-            item {
-                ImageSliderWithIndicators(images = sliderList[0])
-                Spacer(modifier = Modifier.height(6.dp))
-            }
-            item {
-                CategoriesSection()
-                Spacer(modifier = Modifier.height(6.dp))
-            }
-            item {
-                MobileProductsSection()
-                Spacer(modifier = Modifier.height(6.dp))
-            }
-            item {
-                Advert()
-            }
-            item {
-                WomenProductsSection()
-                Spacer(modifier = Modifier.height(6.dp))
-            }
+            .padding()
+    ) {
+        item {
+            SearchBar()
+            Spacer(modifier = Modifier.height(4.dp))
+        }
+        item {
+            ImageSliderWithIndicators(images = sliderList[0])
+            Spacer(modifier = Modifier.height(6.dp))
+        }
+        item {
+            CategoriesSection()
+            Spacer(modifier = Modifier.height(6.dp))
+        }
+        item {
+            MobileProductsSection()
+            Spacer(modifier = Modifier.height(6.dp))
+        }
+        item {
+            Advert()
+        }
+        item {
+            WomenProductsSection()
+            Spacer(modifier = Modifier.height(6.dp))
         }
     }
 }
+
+
