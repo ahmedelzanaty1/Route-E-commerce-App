@@ -10,13 +10,17 @@ import com.example.routee_commerceapp.presentation.Screens.Home.Componant.Bottom
 
 @Composable
 fun CategoriesScreen(modifier: Modifier = Modifier , navController: NavHostController) {
-Scaffold(
-    modifier = modifier,
-    bottomBar = { BottomNavigationBar(
-        navController = navController
-    ) }
-) { innerPadding ->
-    Text(text = "Categories" , modifier = Modifier.padding(innerPadding))
+
+    Text(text = "Categories" , modifier = Modifier.padding())
 
 }
+
+
+@Composable
+fun Favorite(modifier: Modifier = Modifier , navController: NavHostController) {
+    Text(text = "Favorites")
+
 }
+@Composable
+fun ProfileScreen(modifier: Modifier = Modifier , navController: NavHostController) {
+    Text(text = "Profile")}

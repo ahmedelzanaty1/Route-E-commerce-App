@@ -2,12 +2,10 @@ package com.example.routee_commerceapp.navhost
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.routee_commerceapp.constants.Destination
-import com.example.routee_commerceapp.presentation.Screens.Categories.CategoriesScreen
-import com.example.routee_commerceapp.presentation.Screens.Home.Home
+import com.example.routee_commerceapp.presentation.Screens.Home.MainScreen
 import com.example.routee_commerceapp.presentation.Screens.SignUp.SignUpScreen
 import com.example.routee_commerceapp.presentation.Screens.splash.SplashScreen
 import com.example.routee_commerceapp.presentation.componants.LoginScreen
@@ -38,12 +36,11 @@ fun NavHost(modifier: Modifier = Modifier) {
             )
         }
         composable(Destination.HOME) {
-            Home( navController = navController)
+            MainScreen()
         }
-        composable(Destination.CATEGORIES) {
-            CategoriesScreen(navController = navController)
-        }
+
     }
+
 }
 
 
