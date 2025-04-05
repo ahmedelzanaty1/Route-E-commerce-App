@@ -9,8 +9,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.routee_commerceapp.constants.Destination
 import com.example.routee_commerceapp.presentation.Screens.Categories.CategoriesScreen
-import com.example.routee_commerceapp.presentation.Screens.Categories.Favorite
-import com.example.routee_commerceapp.presentation.Screens.Categories.ProfileScreen
 import com.example.routee_commerceapp.presentation.Screens.Home.Componant.BottomNavigationBar
 
 @Composable
@@ -34,10 +32,8 @@ fun MainScreen() {
                 CategoriesScreen(navController = navController)
             }
             composable(Destination.FAVORITES) {
-                Favorite(navController = navController)
             }
             composable(Destination.PROFILE) {
-                ProfileScreen(navController = navController)
             }
         }
     }
