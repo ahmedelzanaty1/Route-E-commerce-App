@@ -19,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.routee_commerceapp.constants.Destination
 import com.example.routee_commerceapp.constants.sliderList
+import com.example.routee_commerceapp.domain.model.home.Product.ProductModel
 import com.example.routee_commerceapp.presentation.Screens.Categories.CategoriesScreen
 import com.example.routee_commerceapp.presentation.Screens.Home.Componant.Advert
 import com.example.routee_commerceapp.presentation.Screens.Home.Componant.BottomNavigationBar
@@ -29,7 +30,7 @@ import com.example.routee_commerceapp.presentation.Screens.Home.Componant.Search
 import com.example.routee_commerceapp.presentation.Screens.Home.Componant.WomenProductsSection
 import com.example.routee_commerceapp.presentation.viewmodel.Home.HomeViewModel
 @Composable
-fun HomeUi(viewModel: HomeViewModel = hiltViewModel()) {
+fun HomeUi(viewModel: HomeViewModel = hiltViewModel() , navHostController: NavHostController , productList: List<ProductModel>) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -48,14 +49,17 @@ fun HomeUi(viewModel: HomeViewModel = hiltViewModel()) {
             Spacer(modifier = Modifier.height(6.dp))
         }
         item {
-            MobileProductsSection()
+            MobileProductsSection(
+                navHostController = navHostController,
+                productList = productList
+            )
             Spacer(modifier = Modifier.height(6.dp))
         }
         item {
             Advert()
         }
         item {
-            WomenProductsSection()
+            WomenProductsSection(navHostController = navHostController , productList = productList)
             Spacer(modifier = Modifier.height(6.dp))
         }
     }

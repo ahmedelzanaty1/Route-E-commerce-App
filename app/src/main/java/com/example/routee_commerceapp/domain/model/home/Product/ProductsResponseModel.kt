@@ -4,6 +4,7 @@ import com.example.routee_commerceapp.data.dto.Product.Brand
 import com.example.routee_commerceapp.data.dto.Product.Category
 import com.example.routee_commerceapp.data.dto.Product.SubcategoryItem
 
+
 data class ProductsResponseModel(
 	val metadata: Metadata? = null,
 	val data: List<ProductModel?>? = null,

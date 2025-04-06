@@ -1,6 +1,7 @@
 package com.example.routee_commerceapp.presentation.Screens.Home.Componant
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,25 +27,32 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.routee_commerceapp.R
 import com.example.routee_commerceapp.domain.model.home.Product.ProductModel
 import com.example.routee_commerceapp.presentation.theme.darkblue
-
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun ProductCard(
-   product : ProductModel,
+    navHostController: NavHostController,
+    product: ProductModel,
     isFavorite: Boolean,
     onFavoriteClick: () -> Unit,
-    onAddToCartClick: () -> Unit
+    onAddToCartClick: () -> Unit,
+    onProductClick: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
             .width(160.dp)
             .padding(8.dp)
             .clip(MaterialTheme.shapes.medium)
+            .clickable {
+                product.id?.let {
+                    onProductClick(it)
+                }
+            }
     ) {
         Box(modifier = Modifier.fillMaxWidth().height(150.dp)) {
             GlideImage(
@@ -133,3 +141,4 @@ fun ProductCard(
         }
     }
 }
+

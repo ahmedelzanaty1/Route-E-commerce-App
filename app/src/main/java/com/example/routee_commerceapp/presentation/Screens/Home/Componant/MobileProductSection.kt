@@ -17,16 +17,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.routee_commerceapp.constants.Resource
+import com.example.routee_commerceapp.domain.model.home.Product.ProductModel
 import com.example.routee_commerceapp.presentation.theme.darkblue
 import com.example.routee_commerceapp.presentation.viewmodel.Home.HomeViewModel
 
 @Composable
 fun MobileProductsSection(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    navHostController: NavHostController,
+    productList: List<ProductModel>
 ) {
-    val musicProductsState = viewModel.mobileProductsState.collectAsState()
+    val mobileProductsState = viewModel.mobileProductsState.collectAsState()
 
     Column(
         modifier = Modifier
@@ -43,17 +48,26 @@ fun MobileProductsSection(
         )
         Spacer(modifier = Modifier.height(8.dp))
 
-        when (val result = musicProductsState.value) {
+        when (val result = mobileProductsState.value) {
             is Resource.Loading -> {
                 Text(text = "Loading...", fontSize = 20.sp)
             }
             is Resource.Success -> {
                 Log.e("TAG", "MobileProductsSection: ${result.data}")
                 LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     items(result.data ?: emptyList()) { product ->
-                        ProductCard(product = product , isFavorite = false, onFavoriteClick = {}, onAddToCartClick = {})
+                        ProductCard(
+                            product = product,
+                            isFavorite = false,
+                            navHostController = navHostController,
+                            onFavoriteClick = { /* Handle favorite click */ },
+                            onAddToCartClick = { /* Handle add to cart click */ },
+                            onProductClick = { productId ->
+                                navHostController.navigate("product_details_screen/$productId")
+                            }
+                        )
                     }
                 }
             }
@@ -64,3 +78,4 @@ fun MobileProductsSection(
         }
     }
 }
+

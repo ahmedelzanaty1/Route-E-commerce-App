@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.routee_commerceapp.constants.Resource
+import com.example.routee_commerceapp.domain.model.home.Product.ProductModel
 import com.example.routee_commerceapp.presentation.Screens.Categories.Componant.CategoriesItem
 import com.example.routee_commerceapp.presentation.Screens.Home.Componant.ProductCard
 import com.example.routee_commerceapp.presentation.Screens.Home.Componant.SearchBar
@@ -30,7 +31,10 @@ import com.example.routee_commerceapp.presentation.viewmodel.CategoryViewModel.C
 fun CategoriesScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    viewModel: CategoriesViewModel = hiltViewModel()
+    viewModel: CategoriesViewModel = hiltViewModel(),
+    productList: List<ProductModel>,
+    navHostController: NavHostController
+
 ) {
     val categoriesState = viewModel.categories.collectAsState()
     val selectedCategory = viewModel.selectedCategory
@@ -88,9 +92,14 @@ fun CategoriesScreen(
                         items(productResult.data ?: emptyList()) { product ->
                             ProductCard(
                                 product = product,
+                                navHostController = navHostController,
                                 isFavorite = false,
                                 onFavoriteClick = { /* منطق إضافة إلى المفضلة */ },
-                                onAddToCartClick = { /* منطق إضافة إلى السلة */ }
+                                onAddToCartClick = { /* منطق إضافة إلى السلة */ },
+                                onProductClick = {
+                                        productId ->
+                                    navHostController.navigate("product_details_screen/$productId")
+                                }
                             )
                         }
                     }
