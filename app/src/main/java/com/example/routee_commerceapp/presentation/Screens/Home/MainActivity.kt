@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.routee_commerceapp.constants.Destination
 import com.example.routee_commerceapp.presentation.Screens.Categories.CategoriesScreen
+import com.example.routee_commerceapp.presentation.Screens.Details.ProductDetailsScreen
 import com.example.routee_commerceapp.presentation.Screens.Home.Componant.BottomNavigationBar
 
 @Composable
@@ -26,15 +27,20 @@ fun MainScreen() {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Destination.HOME) {
-                HomeUi()
+                HomeUi(navHostController = navController, productList = emptyList())
             }
             composable(Destination.CATEGORIES) {
-                CategoriesScreen(navController = navController)
+                CategoriesScreen(navController = navController, productList = emptyList(), navHostController = navController)
             }
-            composable(Destination.FAVORITES) {
-            }
-            composable(Destination.PROFILE) {
+            composable("product_details_screen/{productId}") { backStackEntry ->
+                val productId = backStackEntry.arguments?.getString("productId")
+                productId?.let {
+                    ProductDetailsScreen(navHostController = navController, productId = it  )
+                }
             }
         }
     }
 }
+
+
+

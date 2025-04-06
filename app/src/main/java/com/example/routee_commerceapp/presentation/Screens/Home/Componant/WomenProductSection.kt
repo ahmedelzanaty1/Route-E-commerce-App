@@ -17,14 +17,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.example.routee_commerceapp.constants.Resource
+import com.example.routee_commerceapp.domain.model.home.Product.ProductModel
 import com.example.routee_commerceapp.presentation.theme.darkblue
 import com.example.routee_commerceapp.presentation.viewmodel.Home.HomeViewModel
 
 @Composable
 fun WomenProductsSection(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    navHostController: NavHostController,
+    productList: List<ProductModel>
+
 ) {
     val womenProductsState = viewModel.womenProductsState.collectAsState()
 
@@ -53,7 +58,12 @@ fun WomenProductsSection(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     items(result.data ?: emptyList()) { product ->
-                        ProductCard(product = product , isFavorite = false, onFavoriteClick = {}, onAddToCartClick = {})
+                        ProductCard(product = product , isFavorite = false, onFavoriteClick = {},
+                            onAddToCartClick = {},
+                            navHostController = navHostController,
+                            onProductClick = {
+                                navHostController.navigate("product_details_screen/${product.id}")
+                            })
                     }
                 }
             }

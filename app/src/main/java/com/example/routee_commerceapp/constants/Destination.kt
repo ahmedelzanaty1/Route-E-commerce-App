@@ -9,5 +9,7 @@ object Destination {
     const val CART = "Cart"
     const val PROFILE = "Profile"
     const val CATEGORIES = "categories"
+    const val DETAILS = "product_details_screen/{productId}"
+
 
 }
